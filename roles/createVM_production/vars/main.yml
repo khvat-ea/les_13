@@ -1,2 +1,15 @@
 ---
 # vars file for createVM_production
+gcp_cred_file: /home/User/devops-school-317412-e388b05e76b4.json
+gcp_project: devops-school-317412
+gcp_cred_kind: serviceaccount
+region: us-central1
+zone: a
+instance_name: production
+machine_type: e2-small
+image_OS: projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts
+size_HDD_gb: 10
+# (User) the first key to establish a connection with the Devops Engineer's PC
+# (root) the second key to establish a connection with the Ansible master node
+public_key_devopsPC: User:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC1sP5he06hbILgzpyajJef7FccoH7uac8I3gaNlpoz04FnEY70Bsa6FehfZiJkUlazzoEBXERVjqDcGNEQ5tBYEzk9/3eIqEej2wVr3gnCdmcwncOiHgqnlfdXPiI7NXtbFnKY4h7hcKVsBn3gMYIkwWl3E5WCc7oQPNYS4ipV2AKdmE6QCiErmEb+IvVcNyPYb528wV/xStyozOLxQisM6B4OohU7I66qzbldm8mUuK9PqRvHYsr+lXTDrBSzDemuQrvFY49jGe9lgAw9CmqcKu2nCmCTXICQYXxKOGh3LO9EQta4V3ZwwLEtwcoQzJxAr6zO8maOWw/41fiVWZ+h+kn/UrhZE6VqA1nWd6XkzO9XF8T1q47sXyMIJ0o8CTpnYecSLm3S/1MI3DXXlm+jP0+lUeMy3b0vRe8K0EH3RwoNzkNYDlWCocPQL+pd/grQIXbC/+vGsvi6OSeXybgz8+ojg9rGTnuHwfBoAKiUbNUpjQBTuPYWZLerd4OgIt0= User@WIN-HCMNVMTKJHJ
+public_key_ansibleMaster: root:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4MPykQIkpNC/kohV0OaLxuf8Q8+ZZdHWhkTH7gW0xu14UcH9vYWNUuPe0F/wXDWEWk13tlNjXfV4nD9xZBGX8Ox5QoC7aODVo0zyvJIfzPVv7eE7bu5jI/g2vZb7ES/qRiPXPUvVsNfKXxciwLn1prEI7Y5G1qYO9h0PP0497YHJDp1GOyn+vmE21d36g6WHzKOkeZyNczdKxagXXKtfYqbt/JqxuWJLKcbTrAm2y5uxlFURUUTBHU6pnJMDK5hS1Onqqvd2thJMv+Ls/kW/AX8SD7XexG/a27fPOSNGlbN0hJ3IPEVa6nbeRvV0FO4fQJyMS+YcG4A0KmptxI3Pf root@master
