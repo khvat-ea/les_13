@@ -7,7 +7,38 @@
     - createVM_production
 
 
-- name: Preparation and assembly of the project
+- name: Configure SSH
+  hosts:
+    - build_srv
+    - prod_srv
+  become: yes
+  tasks:
+  - name: Create a 2048-bit SSH key for user root in ~root/.ssh/id_rsa
+    user:
+      name: root
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: .ssh/id_rsa
+
+  - name: Get my SSH public keys
+    local_action: shell ssh-add -L
+    register: ssh_keys
+
+  - name: List my SSH public keys
+    debug: msg="{{ ssh_keys.stdout }}"
+
+  - name: Install my SSH public keys on Remote Servers
+    authorized_key: user={{lookup('env', 'USER')}} key="{{item}}"
+    with_items: "{{ ssh_keys.stdout }}"
+  # - name: Transfer pubkey to "hosts"
+  #   authorized_key:
+  #     user: root
+  #     state: present
+  #     manage_dir: yes
+  #     key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}" 
+
+
+- name: Assembly of the project
   hosts: build_srv
   become: yes
   roles:
