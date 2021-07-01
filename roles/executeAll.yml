@@ -2,7 +2,13 @@
 - name: Creating VM instances GCP
   hosts: localhost
   become: yes
-
   roles:
     - createVM_builder
     - createVM_production
+
+
+- name: Preparation and assembly of the project
+  hosts: builder
+  become: yes
+  roles:
+    - app_build
