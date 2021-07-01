@@ -8,7 +8,13 @@
 
 
 - name: Preparation and assembly of the project
-  hosts: builder
+  hosts: build_srv
   become: yes
   roles:
     - app_build
+
+- name: Launch project
+  hosts: prod_srv
+  become: yes
+  roles:
+    - app_production
