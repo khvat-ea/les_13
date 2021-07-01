@@ -20,22 +20,26 @@
       ssh_key_bits: 2048
       ssh_key_file: .ssh/id_rsa
 
-  - name: Get my SSH public keys
-    local_action: shell ssh-add -L
+
+  - name: fetch all public ssh keys
+    shell: cat ~/.ssh/id_rsa.pub
     register: ssh_keys
+    tags:
+      - ssh
 
-  - name: List my SSH public keys
+  - name: check keys
     debug: msg="{{ ssh_keys.stdout }}"
+    tags:
+      - ssh
 
-  - name: Install my SSH public keys on Remote Servers
-    authorized_key: user={{lookup('env', 'USER')}} key="{{item}}"
-    with_items: "{{ ssh_keys.stdout }}"
-  # - name: Transfer pubkey to "hosts"
-  #   authorized_key:
-  #     user: root
-  #     state: present
-  #     manage_dir: yes
-  #     key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}" 
+  - name: deploy keys on all servers
+    authorized_key: user=root key="{{ item[0] }}"
+    delegate_to: "{{ item[1] }}"
+    with_nested:
+      - "{{ ssh_keys.stdout }}"
+      - "{{groups['clusters']}}"
+    tags:
+      - ssh
 
 
 - name: Assembly of the project
