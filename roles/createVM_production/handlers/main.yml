@@ -1,0 +1,6 @@
+---
+# handlers file for createVM_production
+- name: isRunningVM
+  gcp_compute_instance:
+    name: "{{ instance_name }}"
+    state: RUNNING

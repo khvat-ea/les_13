@@ -5,7 +5,7 @@ gcp_project: devops-school-317412
 gcp_cred_kind: serviceaccount
 region: us-central1
 zone: a
-instance_name: production
+instance_name: builder
 machine_type: e2-small
 image_OS: projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts
 size_HDD_gb: 10
