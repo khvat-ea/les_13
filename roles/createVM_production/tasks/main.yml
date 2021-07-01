@@ -43,7 +43,7 @@
       source: "{{ disk }}"
     # Include public key metadata on the instance
     metadata:
-      ssh-keys: {{ public_key_ansibleMaster }}    
+      ssh-keys: "{{ public_key_ansibleMaster }}"
     # Set label
     labels:
       environment: "{{ instance_name }}"
