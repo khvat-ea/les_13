@@ -8,9 +8,7 @@
 
 
 - name: Configure SSH
-  hosts:
-    - build_srv
-    - prod_srv
+  hosts: all
   become: yes
   tasks:
   - name: Create a 2048-bit SSH key for user root in ~root/.ssh/id_rsa
@@ -20,26 +18,19 @@
       ssh_key_bits: 2048
       ssh_key_file: .ssh/id_rsa
 
-
   - name: fetch all public ssh keys
     shell: cat ~/.ssh/id_rsa.pub
     register: ssh_keys
-    tags:
-      - ssh
 
   - name: check keys
     debug: msg="{{ ssh_keys.stdout }}"
-    tags:
-      - ssh
 
   - name: deploy keys on all servers
     authorized_key: user=root key="{{ item[0] }}"
     delegate_to: "{{ item[1] }}"
     with_nested:
       - "{{ ssh_keys.stdout }}"
-      - "{{groups['clusters']}}"
-    tags:
-      - ssh
+      - "{{groups['all']}}"
 
 
 - name: Assembly of the project

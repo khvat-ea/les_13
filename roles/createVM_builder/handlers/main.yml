@@ -8,4 +8,4 @@
     name: "{{ instance_name }}"
     machine_type: "{{ machine_type }}"
     zone: "{{ region }}-{{ zone }}"
-    state: RUNNING
+    status: RUNNING
